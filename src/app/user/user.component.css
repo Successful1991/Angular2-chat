@@ -1,0 +1,12 @@
+.user__photo{
+  margin-right: 10px;
+}
+.user__photo img{
+  width: 50px;
+  height: 50px;
+}
+.user{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
