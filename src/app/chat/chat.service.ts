@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript';
 import { Observable } from 'rxjs/Observable';
@@ -6,14 +6,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 // Message class for displaying messages in the component
 export class Message {
-  constructor(public content: string, public sentBy: string) {}
+  constructor(public content: string, public sentBy: string ) {}
 }
 @Injectable()
-export class ChatService {
+
+export class ChatService implements OnInit{
+
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({ accessToken: this.token });
   conversation = new BehaviorSubject<Message[]>([]);
+
   constructor() {}
+
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
     const userMessage = new Message(msg, 'user');
@@ -29,4 +33,9 @@ export class ChatService {
   update(msg: Message) {
     this.conversation.next([msg]);
   }
+
+  ngOnInit(){
+  }
+
+
 }

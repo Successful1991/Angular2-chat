@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { ChatPageComponent } from './chat-page/chat-page.component';
-import { RouterModule } from "@angular/router";
 import { UsersService} from "./user/user.service";
 import { HttpClientModule } from '@angular/common/http';
-
+import { ChatModule } from "./chat/chat.module";
+import { RouterModule } from "@angular/router";
+import { ChatDialogComponent } from './chat/chat-dialog/chat-dialog.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
-  {path: 'chat', component: ChatPageComponent}
+  {path: 'chat-dialog', component: ChatDialogComponent}
 ];
 
 @NgModule({
@@ -19,12 +19,12 @@ const routes = [
     AppComponent,
     UserComponent,
     HomePageComponent,
-    ChatPageComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ChatModule
   ],
   providers: [UsersService, HttpClientModule],
   bootstrap: [AppComponent]

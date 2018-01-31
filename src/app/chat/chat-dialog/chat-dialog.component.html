@@ -1,10 +1,15 @@
-<h1>Angular Bot {{}}</h1>
+<h1>Angular Bot </h1>
 <ng-container *ngFor="let message of messages | async">
   <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
                                     'to':   message.sentBy === 'user' }">
     {{ message.content }}
+    <span class="message__time">
+      {{date | date : "h:mm:ss"}}
+    </span>
+
   </div>
 </ng-container>
-<label for="nameField">Your Message</label>
-<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
-<button (click)="sendMessage()">Send</button>
+
+<label class="message__label" for="nameField">Your Message</label>
+<input class="message__text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
+<button class="message__button" (click)="sendMessage()">Send</button>
