@@ -9,7 +9,6 @@ import { UserInterface } from './user.interface';
 
 export class UsersService {
 
-
   constructor(private http: HttpClient) {}
 
   public myUserSubject = new Subject<UserInterface[]>();
@@ -20,6 +19,7 @@ export class UsersService {
   sendUsers(){
    return this.http.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users')
   }
+
 
 }
 

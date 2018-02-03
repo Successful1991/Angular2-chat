@@ -9,10 +9,15 @@ import { ChatModule } from "./chat/chat.module";
 import { RouterModule } from "@angular/router";
 import { ChatDialogComponent } from './chat/chat-dialog/chat-dialog.component';
 
+
+import { AppService} from "./app.service";
+
+
 const routes = [
   {path: '', component: HomePageComponent},
-  {path: 'chat-dialog', component: ChatDialogComponent}
+  {path: 'chat-dialog/:id' , component: ChatDialogComponent}
 ];
+
 
 @NgModule({
   declarations: [
@@ -26,8 +31,10 @@ const routes = [
     RouterModule.forRoot(routes),
     ChatModule
   ],
-  providers: [UsersService, HttpClientModule],
+  providers: [UsersService, HttpClientModule, AppService],
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {}
+
+

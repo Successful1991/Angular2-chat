@@ -33,7 +33,6 @@ export class ChatService implements OnInit{
   update(msg: Message) {
     this.conversation.next([msg]);
   }
-
   ngOnInit(){
   }
 
