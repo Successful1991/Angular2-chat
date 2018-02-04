@@ -1,8 +1,12 @@
-import { Injectable,OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript';
-import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import {AppService} from "../app.service";
+
+
 
 // Message class for displaying messages in the component
 export class Message {
@@ -10,13 +14,16 @@ export class Message {
 }
 @Injectable()
 
-export class ChatService implements OnInit{
+export class ChatService{
+
+  public userName = new Subject<object>();
+  user: object = {username:''};
 
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({ accessToken: this.token });
   conversation = new BehaviorSubject<Message[]>([]);
 
-  constructor() {}
+  constructor(private appService: AppService) {}
 
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
@@ -33,8 +40,19 @@ export class ChatService implements OnInit{
   update(msg: Message) {
     this.conversation.next([msg]);
   }
-  ngOnInit(){
+
+
+  setUserName(){
+    this.appService.activeChatUser.subscribe( user => {
+      this.user = user;
+      this.userName.next(this.user );
+    });
   }
+
+  // getUserName(){
+  //   this.userName.next(this.user );
+  // };
+
 
 
 }

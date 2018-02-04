@@ -1,11 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Injectable,Component, OnInit} from '@angular/core';
 import { ChatService, Message } from '../chat.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
 import { NgIf } from '@angular/common';
 
-import { Injectable } from '@angular/core';
-import {AppService} from "../../app.service";
 
 @Injectable()
 
@@ -15,13 +13,13 @@ import {AppService} from "../../app.service";
   styleUrls: ['./chat-dialog.component.css']
 })
 export class ChatDialogComponent implements OnInit {
+
   user: object = {username:''};
   date;
   messages: Observable<Message[]>;
   formValue: string;
 
-  constructor(public chat: ChatService,
-              private appService: AppService) { }
+  constructor(public chat: ChatService) { }
 
 
   ngOnInit() {
@@ -29,9 +27,12 @@ export class ChatDialogComponent implements OnInit {
     this.messages = this.chat.conversation.asObservable()
       .scan((acc, val) => acc.concat(val) );
 
-    this.appService.activeChatUser.subscribe( user => {
+
+    this.chat.userName.subscribe( user => {
       this.user = user;
     });
+    this.chat.setUserName();
+
   }
 
   sendMessage() {
@@ -39,4 +40,5 @@ export class ChatDialogComponent implements OnInit {
     this.formValue = '';
     this.date = new Date;
   }
+
 }

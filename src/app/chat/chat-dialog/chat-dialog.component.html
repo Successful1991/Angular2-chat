@@ -12,7 +12,7 @@
   </div>
 </ng-container>
 
-<label class="message__label" for="nameField">Your Message</label>
+<label class="message__label">Your Message</label>
 <input class="message__text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
 <button class="message__button" (click)="sendMessage()">Send</button>
 
