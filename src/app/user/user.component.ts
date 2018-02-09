@@ -2,8 +2,7 @@ import {Component, OnInit } from  "@angular/core" ;
 import {UsersService} from "./user.service" ;
 import {UserInterface} from './user.interface';
 import {AppService} from "../app.service";
-import { ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Router, NavigationStart,NavigationEnd,NavigationError,Event} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -12,18 +11,23 @@ import {Subscription} from 'rxjs/Subscription';
 })
 
 export class UserComponent implements OnInit {
-  user = '';
+  user;
   users: UserInterface[];
-  private id: number;
-  private subscription: Subscription;
-
 
   constructor(
     private userService: UsersService,
     private appService: AppService,
-    private activateRoute: ActivatedRoute
+    private router: Router
   ) {
-    this.subscription = activateRoute.params.subscribe(params=>this.id=params['id']);
+    this.router.events.subscribe( (event:Event) => {
+      if(event instanceof NavigationStart){
+        console.log(this.user);
+      }
+      if(event instanceof NavigationEnd){
+      }
+      if(event instanceof NavigationError){
+      }
+    });
   }
 
   ngOnInit():void {
@@ -38,8 +42,9 @@ export class UserComponent implements OnInit {
   }
   userName(user){
     this.appService.activeChatUser.emit(user);
+    this.user = user;
+    this.router.navigate(['chat-dialog', user.id]);
   }
-
 
 
 }

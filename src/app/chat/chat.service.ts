@@ -25,6 +25,8 @@ export class ChatService{
 
   constructor(private appService: AppService) {}
 
+
+
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
     const userMessage = new Message(msg, 'user');
@@ -36,6 +38,8 @@ export class ChatService{
         this.update(botMessage);
       });
   }
+
+
   // Adds message to source
   update(msg: Message) {
     this.conversation.next([msg]);
@@ -45,13 +49,11 @@ export class ChatService{
   setUserName(){
     this.appService.activeChatUser.subscribe( user => {
       this.user = user;
+      console.log(user);
       this.userName.next(this.user );
     });
   }
 
-  // getUserName(){
-  //   this.userName.next(this.user );
-  // };
 
 
 

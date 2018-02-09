@@ -1,5 +1,6 @@
 <li class="user" *ngFor="let user of users" (click)="this.userName(user)">
-  <a [routerLink]="['chat-dialog',user.id]" >
+  <a>
+    <!--[routerLink]="['chat-dialog',user.id]"-->
     <div class="s6" >
       {{user.name}}
     </div>
