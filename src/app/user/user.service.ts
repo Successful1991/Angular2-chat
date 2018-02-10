@@ -11,15 +11,18 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
+  private users: UserInterface[];
   public myUserSubject = new Subject<UserInterface[]>();
 
   setUsers(users: UserInterface[]){
     this.myUserSubject.next(users);
+    this.users = users;
+
   }
+
   sendUsers(){
    return this.http.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users')
   }
-
 
 }
 

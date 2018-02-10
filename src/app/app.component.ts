@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from './user/user.service';
+import {UserInterface} from './user/user.interface';
 
 
 @Component({
@@ -7,8 +9,21 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{
+export class AppComponent implements OnInit {
+  users: UserInterface[];
 
-  constructor() {}
+  constructor(private usersService: UsersService) {
+  }
+
+  ngOnInit() {
+    // this.usersService.myUserSubject.subscribe((users) => {
+    //     this.users = users;
+    //   }
+    // );
+    this.usersService.sendUsers().subscribe(response => {
+      this.users = response;
+      this.usersService.setUsers(response);
+    });
+  }
 
 }
