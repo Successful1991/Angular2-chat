@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from './user/user.service';
 import {UserInterface} from './user/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -11,19 +12,17 @@ import {UserInterface} from './user/user.interface';
 
 export class AppComponent implements OnInit {
   users: UserInterface[];
-
-  constructor(private usersService: UsersService) {
-  }
+  public myUserSubject = new Subject<UserInterface[]>();
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    // this.usersService.myUserSubject.subscribe((users) => {
-    //     this.users = users;
-    //   }
-    // );
-    this.usersService.sendUsers().subscribe(response => {
-      this.users = response;
-      this.usersService.setUsers(response);
+
+    this.http.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users').subscribe(users=>{
+      this.users = users;
+      this.myUserSubject.next(users);
     });
+
   }
+
 
 }

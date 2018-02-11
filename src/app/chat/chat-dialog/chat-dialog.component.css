@@ -1,3 +1,14 @@
+*{
+  box-sizing: border-box;
+}
+.messages{
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+}
+.messages h1{
+  color: #ffffff;
+  text-align: center;
+}
 .message {
   border-radius: 50px;
   margin: 0 15px 10px;
@@ -12,8 +23,6 @@
   text-align: right;
 }
 
-
-
 .message.to .message__time{
   position: absolute;
   left: 10px;
@@ -22,8 +31,6 @@
   position: absolute;
   right: 10px;
 }
-
-
 
 .message.from {
   background-color: #E5E4E9;
@@ -37,35 +44,34 @@
   letter-spacing: 0.6px;
 }
 
-.message__button{
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-}
-.message__save{
-  right: 50px;
-}
 
-
-.message__text{
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  border: 1px solid #727272!important;
-  margin: 0!important;
-  padding-left: 10px;
-}
-
-.message__label{
-  position: absolute;
-  bottom: 50px;
-  left: 10px;
-}
 .message__time{
   font-size: 12px;
   color: #727272;
 }
 
+.formSend{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 40px;
+  background: #ffffff;
+}
 
+.formSend__button{
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+.formSend__text{
+  display: inline-block;
+  min-height: 40px;
+  width: calc( 100% - 100px );
+  margin: 0;
+  padding-left: 10px;
+}
 
+.formSend__label{
+  width: 100%;
+
+}

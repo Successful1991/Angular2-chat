@@ -1,22 +1,15 @@
-<div class="container">
-  <div class="row">
+<div class="app">
     <div class="userList">
+      <div class="home"><a routerLink='/'>Главная</a></div>
       <ul>
         <li class="user" *ngFor="let user of users">
-          <a  [routerLink]="['chat-dialog',user.id]">
-            <div class="s6">
+          <a [routerLink]="['chat-dialog',user.id]">
               {{user.name}}
-            </div>
           </a>
         </li>
       </ul>
     </div>
     <div class="chat">
-      <chat-dialog users =u sers></chat-dialog>
-      // <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
-  </div>
 </div>
-
-
-

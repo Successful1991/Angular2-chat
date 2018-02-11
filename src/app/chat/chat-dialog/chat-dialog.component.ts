@@ -4,8 +4,9 @@ import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/scan';
 import {UserInterface} from '../../user/user.interface'
-import {UsersService} from '../../user/user.service'
 import {Router, NavigationStart, Event, ActivatedRoute} from '@angular/router';
+import {AppComponent} from "../../app.component";
+
 
 
 @Injectable()
@@ -30,9 +31,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   constructor(public chat: ChatService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private usersService: UsersService) {
-  }
-
+              private appComponent: AppComponent) {}
 
   private messageSubscribe() {
     const messages = localStorage.getItem( this.user.id );
@@ -48,8 +47,9 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userSubscription = this.usersService.myUserSubject.subscribe((users) => {
+    this.userSubscription = this.appComponent.myUserSubject.subscribe((users) => {
       this.routerUserSubscription = this.activatedRoute.params.subscribe((params) => {
+        console.log('params',params);
         users.forEach(user => {
           if (user.id == params.id) {
             this.user = user;
