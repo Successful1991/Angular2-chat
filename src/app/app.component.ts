@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {UserInterface} from './user/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
@@ -17,12 +17,25 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users').subscribe(users=>{
-      this.users = users;
-      this.myUserSubject.next(users);
-    });
+    this.receiveUsers();
 
   }
 
+  receiveUsers(){
+    this.http.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users').subscribe(users=>{
+      this.users = users;
+      this.myUserSubject.next(this.users);
+    });
+  }
 
+  @HostListener('window:scroll',[])
+
+  public onChatScroll(): void {
+    setTimeout(function () {
+      const pageYOffset = document.querySelector('.messages').scrollHeight;
+      document.querySelector('.messages').scrollTo(0, pageYOffset) || 0;
+    },300);
+
+
+  }
 }

@@ -1,3 +1,28 @@
 *{
   box-sizing: border-box;
 }
+.userActiveMessage{
+  background: #1f75e2;
+}
+
+::-webkit-scrollbar-track {
+  width: 6px;
+  background-color: rgba(236, 232, 221, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  background-color: rgba(116,116,116,0.3);
+  box-shadow:0 1px 1px #fff inset;
+}
+
+::-webkit-resizer{
+  width:5px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+   width: 7px;
+ }

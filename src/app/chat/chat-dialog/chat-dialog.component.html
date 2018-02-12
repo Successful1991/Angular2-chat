@@ -1,25 +1,27 @@
-<div class="messages">
-  <h1>Angular Bot {{user?.username}}</h1>
-  <div *ngFor="let message of messages | async">
+<div class="chat-dialog">
+  <div class="messages">
+    <h1>Angular Bot {{user?.username}}</h1>
+    <div *ngFor="let message of messages | async">
 
-    <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+      <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
                                     'to':   message.sentBy === 'user' }">
-      <div *ngIf="message.sentBy ? message.sentBy === 'bot' : message.sentBy === 'user' ">{{user?.username}}</div>
-      {{ message.content }}
-      <span class="message__time">
-      {{message.date | date : "h:mm:ss"}}
-    </span>
+        <div class="message__content">
+          <div *ngIf="message.sentBy ? message.sentBy === 'bot' : message.sentBy === 'user' ">{{user?.username}}</div>
+          {{ message.content }}
+        </div>
+        <div class="message__time">{{message.date | date : "h:mm:ss"}}</div>
 
+      </div>
     </div>
   </div>
+  <form action="message" class="formSend">
+    <!--<label class="formSend__label"></label>-->
+    <button class="formSend__clear" (click)="clearMessageUser(user.id)" name="massage" *ngIf="this.buttonClear">очистить историю</button>
+    <a class="formSend__clear-label" (click)="this.buttonClear = !buttonClear"></a>
+    <textarea class="formSend__text" rows="1" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" #myInputText (keydown)="autosize()" placeholder="Your Message" name="message"></textarea>
+    <label class="formSend__button-label"><button class="formSend__button" (click)="sendMessage()" name="massage"></button></label>
+  </form>
 </div>
-<form action="message" class="formSend">
-  <label class="formSend__label"></label>
-  <input class="formSend__text" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" placeholder="Your Message" name="message">
-  <button class="formSend__button" (click)="sendMessage()" name="massage">Send</button>
-</form>
-
-
 
 
 

@@ -1,4 +1,4 @@
-import {Injectable, Component, OnInit, OnDestroy} from '@angular/core';
+import {Injectable, Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ChatService, Message} from '../chat.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -6,6 +6,7 @@ import 'rxjs/add/operator/scan';
 import {UserInterface} from '../../user/user.interface'
 import {Router, NavigationStart, Event, ActivatedRoute} from '@angular/router';
 import {AppComponent} from "../../app.component";
+
 
 
 
@@ -21,6 +22,8 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   private routerUserSubscription: Subscription;
   private routerEventsSubscription: Subscription;
   private userSubscription: Subscription;
+
+  public buttonClear:boolean = false;
 
   user: UserInterface;
   date;
@@ -49,7 +52,6 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscription = this.appComponent.myUserSubject.subscribe((users) => {
       this.routerUserSubscription = this.activatedRoute.params.subscribe((params) => {
-        console.log('params',params);
         users.forEach(user => {
           if (user.id == params.id) {
             this.user = user;
@@ -58,6 +60,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
         this.messageSubscribe()
       });
     });
+    this.appComponent.receiveUsers();
 
     this.routerEventsSubscription = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -69,9 +72,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       }
     });
 
-
   }
-
 
   ngOnDestroy() {
     this.routerUserSubscription.unsubscribe();
@@ -84,8 +85,25 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       this.chat.converse(this.formValue);
       this.formValue = '';
       this.date = new Date;
+      this.appComponent.onChatScroll();
     }
   }
+
+  clearMessageUser(userId){
+    localStorage.removeItem(userId);
+    this.chat.clearConversation();
+    this.messageSubscribe();
+    this.buttonClear = !this.buttonClear;
+  }
+
+  @ViewChild('myInputText') inputText;
+  autosize(){
+      let textArea = this.inputText.nativeElement;
+      textArea.style.overflow = 'hidden';
+      textArea.style.height = '0px';
+      textArea.style.height = textArea.scrollHeight + 'px';
+    }
+
 
 
 
