@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, HostListener} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {ApiAiClient} from 'api-ai-javascript';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -21,6 +21,15 @@ export class ChatService {
 
   constructor() {}
 
+  @HostListener('window:scroll',[])
+
+  //at addition of the message scroll to the last
+  public onChatScroll(): void {
+    setTimeout(function () {
+      const pageYOffset = document.querySelector('.messages').scrollHeight;
+      document.querySelector('.messages').scrollTo(0, pageYOffset) || 0;
+    },0);
+  }
 
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
@@ -32,12 +41,14 @@ export class ChatService {
         const botMessage = new Message(speech, 'bot', new Date());
         this.update(botMessage);
       });
+
   }
 
 
   // Adds message to source
   update(msg: Message) {
     this.conversation.next([msg]);
+    this.onChatScroll();
   }
 
   fillConversation(msgArray: Message[]) {

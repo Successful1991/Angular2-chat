@@ -15,7 +15,6 @@
     </div>
   </div>
   <form action="message" class="formSend">
-    <!--<label class="formSend__label"></label>-->
     <button class="formSend__clear" (click)="clearMessageUser(user.id)" name="massage" *ngIf="this.buttonClear">очистить историю</button>
     <a class="formSend__clear-label" (click)="this.buttonClear = !buttonClear"></a>
     <textarea class="formSend__text" rows="1" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" #myInputText (keydown)="autosize()" placeholder="Your Message" name="message"></textarea>

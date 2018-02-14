@@ -1,7 +1,40 @@
-p{
-  font-size: 32px;
-  color: #ffffff;
-  margin-top: 48%;
-  text-align: center;
+.home{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 30px;
+  background: url("../../img/sky-0000151__1399840272__615.jpg") no-repeat center;
+  background-size: cover;
 }
 
+p{
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+  font-weight: 700;
+}
+
+.greeting{
+  line-height: 36px;
+  opacity: 0;
+  animation: show;
+  animation-duration: 3000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-delay: 800ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show {
+  from{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  to{
+    opacity: 1;
+  }
+}

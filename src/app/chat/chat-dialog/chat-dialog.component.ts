@@ -85,7 +85,8 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       this.chat.converse(this.formValue);
       this.formValue = '';
       this.date = new Date;
-      this.appComponent.onChatScroll();
+
+
     }
   }
 

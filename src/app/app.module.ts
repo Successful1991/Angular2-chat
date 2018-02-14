@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChatModule } from "./chat/chat.module";
 import { AppService } from "./app.service";
 import { AppRoutes } from "./app.routing";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -18,7 +19,8 @@ import { AppRoutes } from "./app.routing";
     BrowserModule,
     HttpClientModule,
     ChatModule,
-    AppRoutes
+    AppRoutes,
+    BrowserAnimationsModule
   ],
   providers: [HttpClientModule, AppService],
   bootstrap: [AppComponent]

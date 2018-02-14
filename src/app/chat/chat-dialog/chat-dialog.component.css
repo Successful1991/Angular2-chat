@@ -13,7 +13,7 @@
   flex-grow: 2;
   flex-shrink: 100;
   overflow-y: scroll;
-
+  background-image: url("../../../img/6-fon-dlya-sayta.jpg");
 }
 .messages h1{
   color: #ffffff;
@@ -103,6 +103,8 @@
   height: 20px;
   font-size: 14px;
   background: #ffffff;
+  font-family: "Georgia";
+  border: 1px solid #dedede;
 }
 .formSend__clear-label{
   width: 40px;
