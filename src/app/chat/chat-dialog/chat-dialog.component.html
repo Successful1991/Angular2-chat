@@ -3,10 +3,11 @@
     <h1>Angular Bot {{user?.username}}</h1>
     <div *ngFor="let message of messages | async">
 
-      <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
-                                    'to':   message.sentBy === 'user' }">
+      <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot', 'to':   message.sentBy === 'user' }">
         <div class="message__content">
-          <div *ngIf="message.sentBy ? message.sentBy === 'bot' : message.sentBy === 'user' ">{{user?.username}}</div>
+          <div *ngIf="message.sentBy ? message.sentBy === 'bot' : message.sentBy === 'user' ">
+            {{user?.username}}
+          </div>
           {{ message.content }}
         </div>
         <div class="message__time">{{message.date | date : "h:mm:ss"}}</div>
@@ -21,7 +22,3 @@
     <label class="formSend__button-label"><button class="formSend__button" (click)="sendMessage()" name="massage"></button></label>
   </form>
 </div>
-
-
-
-

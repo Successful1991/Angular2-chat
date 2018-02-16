@@ -7,9 +7,6 @@ import {UserInterface} from '../../user/user.interface'
 import {Router, NavigationStart, Event, ActivatedRoute} from '@angular/router';
 import {AppComponent} from "../../app.component";
 
-
-
-
 @Injectable()
 
 @Component({
@@ -85,8 +82,6 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
       this.chat.converse(this.formValue);
       this.formValue = '';
       this.date = new Date;
-
-
     }
   }
 
@@ -99,10 +94,9 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
 
   @ViewChild('myInputText') inputText;
   autosize(){
-      let textArea = this.inputText.nativeElement;
-      textArea.style.overflow = 'hidden';
-      textArea.style.height = '0px';
-      textArea.style.height = textArea.scrollHeight + 'px';
+    let textArea = this.inputText.nativeElement;
+    textArea.style.height = '0px';
+    textArea.style.height = textArea.scrollHeight + 'px';
     }
 
 

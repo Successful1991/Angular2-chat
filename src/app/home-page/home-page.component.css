@@ -4,8 +4,9 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   padding: 30px;
-  background: url("../../img/sky-0000151__1399840272__615.jpg") no-repeat center;
+  background: url("../../assets/img/sky-0000151__1399840272__615.jpg") no-repeat center;
   background-size: cover;
 }
 
@@ -17,6 +18,7 @@ p{
 }
 
 .greeting{
+  width: 100%;
   line-height: 36px;
   opacity: 0;
   animation: show;
