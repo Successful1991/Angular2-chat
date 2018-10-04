@@ -34,6 +34,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
               private appComponent: AppComponent) {}
 
   private messageSubscribe() {
+    console.log(this.user);
     const messages = localStorage.getItem( this.user.id );
     if (messages && messages !== 'undefined') {
       this.chat.fillConversation(JSON.parse(messages));
@@ -49,7 +50,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
     this.userSubscription = this.appComponent.myUserSubject.subscribe((users) => {
       this.routerUserSubscription = this.activatedRoute.params.subscribe((params) => {
         users.forEach(user => {
-          if (user.id === params.id) {
+          if (user.id === +params.id) {
             this.user = user;
           }
         });
