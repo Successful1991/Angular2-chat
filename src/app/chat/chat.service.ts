@@ -41,7 +41,6 @@ export class ChatService {
         const botMessage = new Message(speech, 'bot', new Date());
         this.update(botMessage);
       });
-
   }
 
 
