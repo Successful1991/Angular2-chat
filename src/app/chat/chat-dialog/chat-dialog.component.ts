@@ -50,7 +50,7 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
     this.userSubscription = this.appComponent.myUserSubject.subscribe((users) => {
       this.routerUserSubscription = this.activatedRoute.params.subscribe((params) => {
         users.forEach(user => {
-          if (user.id === +params.id) {
+          if (+user.id === +params.id) {
             this.user = user;
           }
         });
