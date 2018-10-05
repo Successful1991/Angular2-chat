@@ -34,7 +34,6 @@ export class ChatDialogComponent implements OnInit, OnDestroy {
               private appComponent: AppComponent) {}
 
   private messageSubscribe() {
-    console.log(this.user);
     const messages = localStorage.getItem( this.user.id );
     if (messages && messages !== 'undefined') {
       this.chat.fillConversation(JSON.parse(messages));
